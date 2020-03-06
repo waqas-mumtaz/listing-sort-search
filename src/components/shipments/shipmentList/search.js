@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import ErrorModal from '../UI/ErrorModal';
-import useHttp from '../../hooks/http';
-import Card from '../UI/card';
+import ErrorModal from '../../UI/ErrorModal';
+import useHttp from '../../../hooks/http';
+import Card from '../../UI/card';
 import './search.css';
 
 const Search = React.memo(props => {

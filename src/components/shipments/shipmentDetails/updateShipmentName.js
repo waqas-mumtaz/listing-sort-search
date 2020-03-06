@@ -1,32 +1,32 @@
 import React, {useState, useEffect} from 'react';
-import Card from '../UI/card';
-import LoadingIndicator from '../UI/LoadingIndicator';
-import './form.css';
-
+import Card from '../../UI/card';
+import LoadingIndicator from '../../UI/LoadingIndicator';
+import './updateShipmentName.css';
 
 const Form = React.memo(props => {
+  const [shipmentName, setShipmentName] = useState('');
 
-  const [enteredTitle, setEnteredTitle] = useState();
-
+  useEffect(()=> {
+    setShipmentName(props.name)
+  },[props.name])
 
   const submitHandler = event => {
     event.preventDefault();
-    props.onUpdateShipmentTitle({ name: enteredTitle });
+    props.onUpdateShipmentTitle({ name: shipmentName });
   };
 
   return (
     <section className="ingredient-form">
       <Card>
-        {enteredTitle}
         <form onSubmit={submitHandler}>
           <div className="form-control">
             <label htmlFor="title">Name</label>
             <input
               type="text"
               id="title"
-              value={enteredTitle}
+              value={shipmentName}
               onChange={event => {
-                setEnteredTitle(event.target.value);
+                setShipmentName(event.target.value);
               }}
             />
           </div>

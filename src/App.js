@@ -1,31 +1,30 @@
 import React from 'react';
+import Shipments from './components/shipments/shipmentList/homePage';
+import NavBar from './components/UI/navBar'
 import './App.scss';
 
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  useRouteMatch
 } from "react-router-dom";
-import Shipments from './components/shipments/shipments';
 const App = props => {
+  //let { path } = useRouteMatch();
   return (
     <Router>
-      <div>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-        </ul>
-
-        <hr />
-
+      <>
+        <NavBar />
         <Switch>
-          <Route path="/">
+          <Route exact path="/">
             <Shipments />
           </Route>
+          <Route path={`/:id`}>
+              {/* shipment details */}
+              <ShipmentDetails />
+            </Route>
         </Switch>
-      </div>
+      </>
     </Router>
   );
 };
