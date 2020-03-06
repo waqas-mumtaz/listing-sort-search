@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import ShipmentDetails from './shipmentDetails';
 
+
 const Shipments = () => {
   const [shipments, setShipments] = useState([]);
   let { path } = useRouteMatch();
@@ -67,7 +68,7 @@ const Shipments = () => {
         <ShipmentList shipments={shipments} />
         </Route>
         <Route path={`/:id`}>
-          <ShipmentDetails />
+          <ShipmentDetails test='rests' />
         </Route>
       </Switch>
       </section>
