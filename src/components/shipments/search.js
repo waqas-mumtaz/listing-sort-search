@@ -14,20 +14,6 @@ const Search = React.memo(props => {
     const timer = setTimeout(() => {
       if (enteredFilter === inputRef.current.value) {
         const query = enteredFilter.length < 5 ? '' : `?id=${enteredFilter}`;
-        // fetch(
-        //   'http://localhost:3000/shipments/' + query
-        // )
-        //   .then(response => response.json())
-        //   .then(responseData => {
-        //     const loadedShipments = [];
-        //     for (const key in responseData) {
-        //       loadedShipments.push({
-        //         id: responseData[key].id,
-        //         name: responseData[key].name,
-        //       });
-        //     }
-        //     onLoadShipments(loadedShipments);
-        //   });
         sendRequest(
           'http://localhost:3000/shipments' + query,
           'GET'
