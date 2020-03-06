@@ -28,16 +28,16 @@ const ShipmentList = props => {
     const renderPageNumbers = pageNumbers.map(number => {
         return (
 
-                    <li key={number} >
-                        <a id={number} onClick={(e) => handleClick(e)} class="pagination-link " aria-label="Page 1" aria-current="page"> {number}</a>
-                    </li>
-             
+            <li key={number} >
+                <a id={number} onClick={(e) => handleClick(e)} class="pagination-link " aria-label="Page 1" aria-current="page"> {number}</a>
+            </li>
+
         );
     });
 
     return (
         <div>
-         
+
             <ul>
                 {currentTodos.map(ig => (
                     <li key={ig.id}>
@@ -48,22 +48,11 @@ const ShipmentList = props => {
             </ul>
             <nav class="pagination" role="navigation" aria-label="pagination">
                 <ul class="pagination-list">
-                {renderPageNumbers}
+                    {renderPageNumbers}
                 </ul>
             </nav>
         </div>
     );
-
-    //   return (
-    //     <section className="shipment-list">
-    //       <h2>Shipments</h2>
-
-    //       {/* <ul>
-
-
-    //       </ul> */}
-    //     </section>
-    //   );
 };
 
 export default ShipmentList;

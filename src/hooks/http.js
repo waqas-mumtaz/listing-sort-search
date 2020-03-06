@@ -4,8 +4,6 @@ const initialState = {
   loading: false,
   error: null,
   data: null,
-  extra: null,
-  identifier: null
 };
 
 const httpReducer = (curHttpState, action) => {
@@ -14,16 +12,13 @@ const httpReducer = (curHttpState, action) => {
       return {
         loading: true,
         error: null,
-        data: null,
-        extra: null,
-        identifier: action.identifier
+        data: null
       };
     case 'RESPONSE':
       return {
         ...curHttpState,
         loading: false,
         data: action.responseData,
-        extra: action.extra
       };
     case 'ERROR':
       return { loading: false, error: action.errorMessage };
@@ -40,8 +35,8 @@ const useHttp = () => {
   const clear = useCallback(() => dispatchHttp({ type: 'CLEAR' }), []);
 
   const sendRequest = useCallback(
-    (url, method, body, reqExtra, reqIdentifer) => {
-      dispatchHttp({ type: 'SEND', identifier: reqIdentifer });
+    (url, method, body) => {
+      dispatchHttp({ type: 'SEND' });
       fetch(url, {
         method: method,
         body: body,
@@ -56,7 +51,6 @@ const useHttp = () => {
           dispatchHttp({
             type: 'RESPONSE',
             responseData: responseData,
-            extra: reqExtra
           });
         })
         .catch(error => {
@@ -74,8 +68,8 @@ const useHttp = () => {
     data: httpState.data,
     error: httpState.error,
     sendRequest: sendRequest,
-    reqExtra: httpState.extra,
-    reqIdentifer: httpState.identifier,
+    // reqExtra: httpState.extra,
+    // reqIdentifer: httpState.identifier,
     clear: clear
   };
 };

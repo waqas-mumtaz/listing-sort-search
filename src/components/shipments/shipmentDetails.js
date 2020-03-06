@@ -14,32 +14,11 @@ const ShipmentDetails = props => {
         error,
         data,
         sendRequest,
-        reqExtra,
-        reqIdentifer,
         clear
       } = useHttp();
     
 
     let { id } = useParams();
-
-
-//   useEffect(() => {
-//         dispatchHttp({ type: 'SEND' });
-//         fetch(
-//           'http://localhost:3000/shipments/' + id
-//         )
-//           .then(response => {
-//             dispatchHttp({ type: 'RESPONSE' });
-//             return response.json();
-//           })
-//           .then(responseData => {
-//             const loadedShipments = {...responseData};
-//             setShipments(loadedShipments);
-//           }).catch(error => {
-//             dispatchHttp({ type: 'ERROR', errorMessage: 'Something went wrong!' });
-//           });
-
-//   }, []);
 
   useEffect(() => {
         sendRequest(
@@ -62,40 +41,10 @@ const ShipmentDetails = props => {
     sendRequest(
         'http://localhost:3000/shipments/' + id,
       'PUT',
-      JSON.stringify(result),
-      result,
-      'UPDATE_TITLE'
+      JSON.stringify(result)
     );
   }, [sendRequest]);
 
-
-//   const updateShipmentTitle = title => {
-//     let getShipmentdata = {...shipments}
-//     let result = Object.assign(getShipmentdata, title);
-//     dispatchHttp({ type: 'SEND' });
-//      fetch(
-//      'http://localhost:3000/shipments/' + id, {
-//       method: 'PUT',
-//       body: JSON.stringify(result),
-//       headers: { 'Content-Type': 'application/json' }
-//     })
-//       .then(response => {
-//         dispatchHttp({ type: 'RESPONSE' });
-//         return response.json();
-//       })
-//       .then(responseData => {
-//           console.log(responseData)
-//         const loadedShipments = {...responseData};
-//         setShipments(loadedShipments);
-//       }).catch(error => {
-//         dispatchHttp({ type: 'ERROR', errorMessage: 'Something went wrong!' });
-//       });
-    
- //  };
-
-  const clearError = () => {
-   // dispatchHttp({ type: 'CLEAR' });
-  }
 
   return (
     <div>
