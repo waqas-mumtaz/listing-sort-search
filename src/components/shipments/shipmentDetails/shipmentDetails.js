@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import ErrorModal from '../../UI/ErrorModal';
+import Modal from '../../UI/Modal';
 import Form from './updateShipmentName';
 import useHttp from '../../../hooks/http';
 
@@ -8,14 +8,12 @@ import { useParams } from "react-router-dom";
 const ShipmentDetails = props => {
 
     const [shipment, setShipment] = useState([]);
-
     const { isLoading, error, data,  sendRequest,  clear } = useHttp();
-
     let { id } = useParams();
   
   useEffect(() => {
         sendRequest(
-            'http://localhost:3000/shipments/' + id,
+            'http://localhost:3000/shipmentxxs/' + id,
           'GET'
         );
   }, [ sendRequest]);
@@ -25,6 +23,7 @@ const ShipmentDetails = props => {
       const loadedShipments = {...data};
       setShipment(loadedShipments);
     }
+    console.log(error)
   }, [data, isLoading, error]);
 
 
@@ -40,13 +39,23 @@ const ShipmentDetails = props => {
 
 
   return (
-    <div>
-              {error && <ErrorModal  onClose={clear}>{error}</ErrorModal>}
-                {shipment.name}
+    <section className="section">
+    <div className="container">
+      <h1 className="title">{shipment.name}</h1>
+      <div className="columns">
+        <div className="column">
+        {error && <Modal onClose={clear}>{error}</Modal>}
 
-            <Form name={shipment.name} onUpdateShipmentTitle={updateShipmentTitle} loading={isLoading}/>
-           
+         <Form 
+         name={shipment.name} 
+         onUpdateShipmentTitle={updateShipmentTitle} 
+         loading={isLoading} />
+           {/* <Modal>ss</Modal> */}
+
+        </div>
+      </div>
     </div>
+  </section>
   );
 };
 

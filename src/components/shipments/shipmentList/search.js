@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import ErrorModal from '../../UI/ErrorModal';
+import Modal from '../../UI/ErrorModal';
 import useHttp from '../../../hooks/http';
 import Card from '../../UI/card';
 import './search.css';
@@ -15,7 +15,7 @@ const Search = React.memo(props => {
       if (enteredFilter === inputRef.current.value) {
         const query = enteredFilter.length < 5 ? '' : `?id=${enteredFilter}`;
         sendRequest(
-          'http://localhost:3000/shipments' + query,
+          'http://localhost:3000/shipmensts' + query,
           'GET'
         );
       }
@@ -40,7 +40,7 @@ const Search = React.memo(props => {
 
   return (
     <section className="search">
-      {error && <ErrorModal onClose={clear}>{error}</ErrorModal>}
+      {error && <Modal onClose={clear}>{error}</Modal>}
       <Card>
         <div className="search-input">
           <label>Filter by Title</label>

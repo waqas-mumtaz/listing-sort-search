@@ -2,7 +2,6 @@ import React, { useState, useContext, useCallback } from 'react';
 import ShipmentPagination from './shipmentPagination';
 import Search from './search';
 import { ShipmentContext } from '../../../context/shipmentContext';
-import ShipmentDetails from '../shipmentDetails/shipmentDetails';
 
 import Sort from './sort';
 import {
@@ -12,7 +11,7 @@ import {
 } from "react-router-dom";
 
 
-const Shipments = () => {
+const HomePage = () => {
 
   const { setShipments } = useContext(ShipmentContext);
 
@@ -26,31 +25,22 @@ const Shipments = () => {
   return (
     <section className="section">
       <div className="container">
-        <h1 className="title">FreightHub Frontend Coding Challenge</h1>
+        <h1 className="title">All Shipments</h1>
         <div className="columns">
-          <div className="column"></div>
+          <div className="column">
           {/* sort dropdown */}
           <Sort onLoadShipments={filteredShipmentsHandler} />
 
           {/* search bar */}
           <Search onLoadShipments={filteredShipmentsHandler} />
 
-          <Switch>
-            <Route exact path={path}>
-
-              {/* All shipments */}
-              <ShipmentPagination />
-            </Route>
-            <Route path={`/:id`}>
-
-              {/* shipment details */}
-              <ShipmentDetails />
-            </Route>
-          </Switch>
+            {/* All shipments */}
+            <ShipmentPagination />
+            </div>
         </div>
       </div>
     </section>
   );
 }
 
-export default Shipments;
+export default HomePage;
