@@ -2,8 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { ShipmentContext } from '../../../context/shipmentContext';
 
 const Sort = React.memo(props => {
-    const { onLoadShipments } = props;
-    const { shipments } = useContext(ShipmentContext);
+    const { shipments, setShipments } = useContext(ShipmentContext);
 
     const [dropdown, setDropdown] = useState(false);
     const [orderBool, setOrderBool] = useState(true);
@@ -34,7 +33,7 @@ const Sort = React.memo(props => {
         setOrderBool(!orderBool)
         let getShipments = [...shipments];
         getShipments.sort(compareValues(key, orderBool ? 'asc' : 'desc' ));
-        onLoadShipments(getShipments);
+        setShipments(getShipments);
     }
     return (
         <div className={(dropdown ? 'is-active ' : '') + 'dropdown'}  onClick={()=> setDropdown(!dropdown) }>

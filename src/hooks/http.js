@@ -69,8 +69,6 @@ const useHttp = () => {
     data: httpState.data,
     error: httpState.error,
     sendRequest: sendRequest,
-    // reqExtra: httpState.extra,
-    // reqIdentifer: httpState.identifier,
     clear: clear
   };
 };

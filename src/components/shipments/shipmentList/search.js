@@ -1,58 +1,35 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Modal from '../../UI/ErrorModal';
-import useHttp from '../../../hooks/http';
-import Card from '../../UI/card';
+import React, { useState } from 'react';
 import './search.css';
 
-const Search = React.memo(props => {
-  const { onLoadShipments } = props;
+const Search = React.memo(({inputRef, inputValue}) => {
+
   const [enteredFilter, setEnteredFilter] = useState('');
-  const inputRef = useRef();
-  const { isLoading, data, error, sendRequest, clear } = useHttp();
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (enteredFilter === inputRef.current.value) {
-        const query = enteredFilter.length < 5 ? '' : `?id=${enteredFilter}`;
-        sendRequest(
-          'http://localhost:3000/shipmensts' + query,
-          'GET'
-        );
-      }
-    }, 500);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [enteredFilter, sendRequest, inputRef]);
-
-  useEffect(() => {
-    if (!isLoading && !error && data) {
-      const loadedShipments = [];
-      for (const key in data) {
-        loadedShipments.push({
-          id: data[key].id,
-          name: data[key].name
-        });
-      }
-      onLoadShipments(loadedShipments);
-    }
-  }, [data, isLoading, error, onLoadShipments]);
+  const inputHandler = (e) => {
+    inputValue(e.target.value); 
+    setEnteredFilter(e.target.value)
+  }
 
   return (
-    <section className="search">
-      {error && <Modal onClose={clear}>{error}</Modal>}
-      <Card>
-        <div className="search-input">
-          <label>Filter by Title</label>
-          <input
-            ref={inputRef}
-            type="text"
-            value={enteredFilter}
-            onChange={event => setEnteredFilter(event.target.value)}
-          />
-        </div>
-      </Card>
-    </section>
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Search</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control">
+                    <input
+                      ref={inputRef}
+                      type="text"
+                      className='input'
+                      value={enteredFilter}
+                      onChange={event => inputHandler(event)}
+                      placeholder='Enter Shipment ID'
+                    />
+                  </p>
+                </div>
+              </div>
+            </div>
   );
 });
 

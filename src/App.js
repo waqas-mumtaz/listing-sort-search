@@ -1,6 +1,6 @@
 import React from 'react';
-import HomePage from './components/shipments/shipmentList/homePage';
-import ShipmentDetails from './components/shipments/shipmentDetails/shipmentDetails';
+import Shipments from './components/shipments/shipmentList';
+import ShipmentDetails from './components/shipments/shipmentDetails';
 
 import NavBar from './components/UI/navBar';
 import './App.scss';
@@ -17,7 +17,7 @@ const App = props => {
         <NavBar />
         <Switch>
           <Route exact path="/">
-            <HomePage />
+            <Shipments />
           </Route>
           <Route path={`/:id`}>
 
