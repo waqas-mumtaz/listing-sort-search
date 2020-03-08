@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ShipmentList /> should render <Pagination /> 1`] = `ShallowWrapper {}`;
+
+exports[`<ShipmentList /> should render <Pagination /> 2 Times 1`] = `ShallowWrapper {}`;
+
+exports[`<ShipmentList /> should render <ShipmentListItems />  1`] = `ShallowWrapper {}`;
+
+exports[`<ShipmentList /> should render correctly 1`] = `ShallowWrapper {}`;

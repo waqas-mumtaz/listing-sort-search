@@ -19,7 +19,7 @@ const Pagination = ({ paginationHandler, perPageItem, currentPage, listLength })
                             {
                                 pageNumbers.map(number => (
                                     <li key={number} >
-                                        <a id={number} onClick={(e) => paginationHandler(Number(e.target.id))} className={(currentPage === number ? 'is-current ' : '') + 'pagination-link'} aria-label="Page {number}" aria-current="page"> {number}</a>
+                                        <span style={{cursor: 'pointer'}} id={number} onClick={(e) => paginationHandler(Number(e.target.id))} className={(currentPage === number ? 'is-current ' : '') + 'pagination-link'} aria-label="Page {number}" aria-current="page"> {number}</span>
                                     </li>
 
                                 ))

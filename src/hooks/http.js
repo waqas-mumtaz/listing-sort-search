@@ -34,10 +34,10 @@ const useHttp = () => {
 
   const clear = useCallback(() => dispatchHttp({ type: 'CLEAR' }), []);
 
-  const sendRequest = useCallback(
+  const sendRequest =  useCallback(
     (url, method, body) => {
       dispatchHttp({ type: 'SEND' });
-      fetch(url, {
+     fetch(url, {
         method: method,
         body: body,
         headers: {

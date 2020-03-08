@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { ShipmentContext } from '../../../context/shipmentContext';
 
 const Sort = React.memo(props => {
@@ -36,7 +36,8 @@ const Sort = React.memo(props => {
         setShipments(getShipments);
     }
     return (
-        <div className={(dropdown ? 'is-active ' : '') + 'dropdown'}  onClick={()=> setDropdown(!dropdown) }>
+        <div className={(dropdown ? 'is-active ' : '') + 'dropdown'}  
+        onClick={()=> setDropdown(!dropdown) }>
             <div className="dropdown-trigger">
             <button className="button" aria-haspopup="true" aria-controls="dropdown-menu">
                 <span>Sort Shipments</span>
@@ -47,17 +48,17 @@ const Sort = React.memo(props => {
             </div>
         <div className="dropdown-menu" id="dropdown-menu" role="menu">
           <div className="dropdown-content">
-            <a href="#" className="dropdown-item" onClick={() => sort('id')}>
+            <a href=".#" className="dropdown-item" onClick={() => sort('id')}>
              Sort by Id 
              <span>
-             ( <i class="fa fa-long-arrow-up" aria-hidden="true"></i><i class="fa fa-long-arrow-down" aria-hidden="true"></i> 
-                 )
+             ( <i className="fa fa-long-arrow-up" aria-hidden="true"></i>
+             <i className="fa fa-long-arrow-down" aria-hidden="true"></i>)
              </span>
             </a>
-            <a href="#" className="dropdown-item" onClick={() => sort('name')}>
+            <a href=".#" className="dropdown-item" onClick={() => sort('name')}>
              Sort by name  <span>
-             ( <i class="fa fa-long-arrow-up" aria-hidden="true"></i><i class="fa fa-long-arrow-down" aria-hidden="true"></i> 
-                 )
+             ( <i className="fa fa-long-arrow-up" aria-hidden="true"></i>
+             <i className="fa fa-long-arrow-down" aria-hidden="true"></i> )
              </span>
             </a>
           </div>

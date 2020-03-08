@@ -1,25 +1,24 @@
 import React, { useState } from 'react';
-import './search.css';
+import './search.scss';
 
-const Search = React.memo(({inputRef, inputValue}) => {
+const Search = React.memo(({ inputValue}) => {
 
   const [enteredFilter, setEnteredFilter] = useState('');
 
   const inputHandler = (e) => {
-    inputValue(e.target.value); 
-    setEnteredFilter(e.target.value)
+          inputValue(e.target.value); 
+          setEnteredFilter(e.target.value)
   }
 
   return (
-            <div class="field is-horizontal">
-              <div class="field-label is-normal">
-                <label class="label">Search</label>
+            <div className="field is-horizontal">
+              <div className="field-label is-normal">
+                <label className="label">Search</label>
               </div>
-              <div class="field-body">
-                <div class="field">
-                  <p class="control">
+              <div className="field-body">
+                <div className="field">
+                  <p className="control">
                     <input
-                      ref={inputRef}
                       type="text"
                       className='input'
                       value={enteredFilter}

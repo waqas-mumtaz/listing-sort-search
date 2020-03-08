@@ -1,14 +1,24 @@
 import React from 'react';
 
-import './LoadingIndicator.css';
+import './LoadingIndicator.scss';
 
 const LoadingIndicator = () => (
-  <div className="lds-ring">
-    <div />
-    <div />
-    <div />
-    <div />
-  </div>
+  <section className="section">
+    <div className="container">
+      <div className="columns is-centered">
+        <div className="column is-half">
+          <figure style={{textAlign: 'center'}}>
+            <div className="lds-ring">
+              <div />
+              <div />
+              <div />
+              <div />
+            </div>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
 );
 
 export default LoadingIndicator;

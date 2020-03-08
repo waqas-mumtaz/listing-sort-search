@@ -4,7 +4,7 @@ const Notification = React.memo(props => {
 
     return (
     <div className={`${props.class} notification`} >
-    {/* <button class="delete"  onClick={props.onClose}></button> */}
+    {/* <button className="delete"  onClick={props.onClose}></button> */}
     {props.children}
   </div>
   );

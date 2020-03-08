@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 export const ShipmentContext = React.createContext({
   shipments: [],
@@ -12,8 +12,6 @@ const ShipmentContextProvider = props => {
     setFetchShipments(getShipments);
   };
 
- 
-  
   return (
     <ShipmentContext.Provider
       value={{ shipments: fetchShipments,  setShipments: updateShipmentsHandler }}

@@ -1,0 +1,10 @@
+.edit-btn{
+    font-size: 1.7rem;
+    margin-left: 1rem;
+    cursor: pointer;
+    color: #1e85ca;
+
+    &:hover{
+        color: darken( #1e85ca, 20%)
+    }
+}

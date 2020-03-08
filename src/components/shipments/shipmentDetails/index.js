@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import ErrorModal from '../../UI/Modal';
 import Notification from '../../UI/Notification';
 import LoadingIndicator from '../../UI/LoadingIndicator';
 import DetailPage from './detailPage';
@@ -8,20 +7,24 @@ import useHttp from '../../../hooks/http';
 
 import { useParams } from "react-router-dom";
 
-const ShipmentDetails = props => {
+const ShipmentDetails = () => {
 
+    //to store single shipment
     const [shipment, setShipment] = useState([]);
+
+    //Display Edit Form
     const [showForm, setShowForm] = useState(false);
-    const { isLoading, error, data, sendRequest, clear } = useHttp();
+
+    const { isLoading, error, data, sendRequest } = useHttp();
 
     let { id } = useParams();
 
     useEffect(() => {
         sendRequest(
-            'http://localhost:3000/shipments/' + id,
+            '/shipments/' + id,
             'GET'
         );
-    }, [sendRequest]);
+    }, [sendRequest, id]);
 
     useEffect(() => {
         if (!isLoading && !error && data) {
@@ -31,22 +34,25 @@ const ShipmentDetails = props => {
     }, [data, isLoading, error]);
 
 
+    //update shipment name func
     const updateShipmentTitle = useCallback(title => {
         let getShipmentdata = { ...shipment }
         let result = Object.assign(getShipmentdata, title);
         sendRequest(
-            'http://localhost:3000/shipments/' + id,
+            '/shipments/' + id,
             'PUT',
             JSON.stringify(result)
         );
-    }, [sendRequest]);
+    }, [sendRequest, shipment, id]);
 
+    // detail page data
     const renderedDetailPage = error ?
-        <Notification class='is-danger is-light'>{error}</Notification> :
+        <Notification className='is-danger is-light'>{error}</Notification> :
         isLoading ?
             <LoadingIndicator /> :
             <DetailPage shipment={shipment} showFormHandler={() => (setShowForm(true))} />
 
+    // shipment name edit form
     const renderedForm = showForm &&
         <UpdateShipmentNameForm
             name={shipment.name}

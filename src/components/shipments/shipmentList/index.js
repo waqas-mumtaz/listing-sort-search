@@ -1,8 +1,7 @@
-import React, { useState, useContext, useRef, useCallback, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import ShipmentList from './shipments';
 import Search from './search';
 import Notification from '../../UI/Notification';
-import LoadingIndicator from '../../UI/LoadingIndicator';
 import { ShipmentContext } from '../../../context/shipmentContext';
 import useHttp from '../../../hooks/http';
 
@@ -11,53 +10,60 @@ import Sort from './sort';
 const Shipments = () => {
   const { setShipments } = useContext(ShipmentContext);
 
+  //search input
   const [enteredFilter, setEnteredFilter] = useState('');
-  const inputRef = useRef();
+  const [dataFetched, setDateFetched] = useState(false);
   const { isLoading, data, error, sendRequest, clear } = useHttp();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (enteredFilter === inputRef.current.value) {
-        const query = enteredFilter.length < 1 ? '' : `?id=${enteredFilter}`;
-        sendRequest(
-          'http://localhost:3000/shipments' + query,
-          'GET'
-        );
+    sendRequest(
+      '/shipments',
+      'GET'
+    );
 
+  }, [sendRequest]);
+
+  //search func
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!isLoading && !error && data) {
+        const loadedShipments = [...data];
+        const filteredShipments = loadedShipments.filter((data) => {
+          if (enteredFilter.length === 0)
+            return data
+          else if (data.id.toUpperCase().includes(enteredFilter.toUpperCase())) {
+            return data
+          }
+        })
+        setShipments(filteredShipments);
+        setDateFetched(true);
       }
     }, 500);
     return () => {
       clearTimeout(timer);
     };
-  }, [enteredFilter, sendRequest, inputRef]);
-
-  useEffect(() => {
-    if (!isLoading && !error && data) {
-      const loadedShipments = [...data];
-      setShipments(loadedShipments);
-    }
-  }, [data, isLoading, error]);
+  }, [data, isLoading, error, enteredFilter]);
 
   return (
     <section className="section">
       <div className="container">
         <h1 className="title">All Shipments</h1>
         <section className='section'>
-          <div class="columns">
-            <div class="column is-two-thirds">
-              <Search inputRef={inputRef} inputValue={(value) => (setEnteredFilter(value))} />
+          <div className="columns">
+            <div className="column is-two-thirds">
+              <Search inputValue={(value) => (setEnteredFilter(value))} />
             </div>
-            <div class="column">
+            <div className="column">
               <Sort />
             </div>
           </div>
         </section>
         <div className="columns">
           <div className="column">
-          {error ? 
-          <Notification onClose={clear} class='is-danger is-light'>{error}</Notification> :
-          isLoading ? <LoadingIndicator /> :  <ShipmentList />
-          }
+            {error ?
+              <Notification onClose={clear} className='is-danger is-light'>{error}</Notification> :
+              <ShipmentList dataFetched={dataFetched} />
+            }
           </div>
         </div>
       </div>

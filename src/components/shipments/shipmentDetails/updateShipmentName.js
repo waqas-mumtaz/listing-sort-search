@@ -3,20 +3,26 @@ import Modal from '../../UI/Modal';
 import Notification from '../../UI/Notification';
 import LoadingIndicator from '../../UI/LoadingIndicator';
 
-import './updateShipmentName.css';
+const UpdateShipmentNameForm = React.memo((props) => {
 
-const UpdateShipmentNameForm = React.memo(props => {
+  const {onUpdateShipmentTitle, name, loading, hasError, showFormHandler} = props;
   const [shipmentName, setShipmentName] = useState('');
+  
+  //to control submit button
   const [isSubmit, setIsSubmit] = useState(false);
+  
   const [notificationMessage, setNotificationMessage] = useState('');
   const [notificationClass, setNotificationClass] = useState('');
 
   useEffect(() => {
-    setShipmentName(props.name)
-  }, [props.name])
+    //set shipment name when component rendered
+    setShipmentName(name)
+  }, [name])
 
   useEffect(() => {
-    if (!props.loading && !props.hasError) {
+
+    //if no errors
+    if (!loading && !hasError) {
       setNotificationClass('is-success is-light');
       setNotificationMessage('Name Updated Successfully')
     } else {
@@ -24,17 +30,22 @@ const UpdateShipmentNameForm = React.memo(props => {
       setNotificationMessage('Something Went Wrong')
     }
 
-  }, [props.loading, props.hasError, isSubmit]);
+  }, [loading, hasError]);
 
   const submitHandler = event => {
-    setIsSubmit(true)
     event.preventDefault();
-    props.onUpdateShipmentTitle({ name: shipmentName });
 
+    //disable button when form is submitted
+    setIsSubmit(true)
+
+    onUpdateShipmentTitle({ name: shipmentName });
+
+    //hide form popup after 1.5 secs
     const timer = setTimeout(() => {
       setIsSubmit(false)
-      props.showFormHandler();
-    }, 2000);
+      showFormHandler();
+    }, 1500);
+
     return () => {
       clearTimeout(timer);
     };
@@ -42,16 +53,16 @@ const UpdateShipmentNameForm = React.memo(props => {
   };
 
   return (
-    <Modal onClose={props.showFormHandler}>
+    <Modal onClose={showFormHandler}>
       {isSubmit &&
-        <Notification class={notificationClass}>{notificationMessage}</Notification>
+        <Notification className={notificationClass}>{notificationMessage}</Notification>
       }
       {props.loading ?
         <LoadingIndicator /> :
         <form onSubmit={submitHandler}>
-          <div class="field">
-            <label class="label">Shipment Name</label>
-            <div class="control">
+          <div className="field">
+            <label className="label">Shipment Name</label>
+            <div className="control">
               <input
                 type="text"
                 id="title"
@@ -63,16 +74,16 @@ const UpdateShipmentNameForm = React.memo(props => {
               />
             </div>
           </div>
-          <div class="field is-grouped">
-            <p class="control">
+          <div className="field is-grouped">
+            <p className="control">
               <button type="submit" className="button is-primary" disabled={isSubmit && 'disabled'} >
                 Update Name
             </button>
             </p>
-            <p class="control">
-              <a class="button is-light" onClick={props.showFormHandler}>
+            <p className="control">
+              <span className="button is-light" onClick={showFormHandler}>
                 Cancel
-            </a>
+            </span>
             </p>
           </div>
         </form>}
