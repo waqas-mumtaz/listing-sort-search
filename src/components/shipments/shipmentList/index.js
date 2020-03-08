@@ -18,7 +18,7 @@ const Shipments = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (enteredFilter === inputRef.current.value) {
-        const query = enteredFilter.length < 5 ? '' : `?id=${enteredFilter}`;
+        const query = enteredFilter.length < 1 ? '' : `?id=${enteredFilter}`;
         sendRequest(
           'http://localhost:3000/shipments' + query,
           'GET'
@@ -33,13 +33,7 @@ const Shipments = () => {
 
   useEffect(() => {
     if (!isLoading && !error && data) {
-      const loadedShipments = [];
-      for (const key in data) {
-        loadedShipments.push({
-          id: data[key].id,
-          name: data[key].name
-        });
-      }
+      const loadedShipments = [...data];
       setShipments(loadedShipments);
     }
   }, [data, isLoading, error]);
