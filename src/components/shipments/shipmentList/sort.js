@@ -28,14 +28,15 @@ const Sort = React.memo(props => {
         }
     );
     
-
     const sort = (key) => {
         setOrderBool(!orderBool)
         let getShipments = [...shipments];
         getShipments.sort(compareValues(key, orderBool ? 'asc' : 'desc' ));
         setShipments(getShipments);
     }
+
     return (
+        <>
         <div className={(dropdown ? 'is-active ' : '') + 'dropdown'}  
         onClick={()=> setDropdown(!dropdown) }>
             <div className="dropdown-trigger">
@@ -62,8 +63,10 @@ const Sort = React.memo(props => {
              </span>
             </a>
           </div>
+         
         </div>
       </div>
+      </>
     )
 })
 export default Sort;

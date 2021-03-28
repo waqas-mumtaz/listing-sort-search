@@ -6,7 +6,7 @@ const NavBar = () => {
             <div className="container">
                 <div className="navbar-brand">
                     <Link to="/" className="navbar-item" >
-                        <img src="https://freighthub.com/wp-content/themes/freighthub/img/logo/logo.svg" width="112" height="28" alt="freighthub logo" />
+                       Company logo
                     </Link>
                 </div>
             </div>

@@ -54,7 +54,6 @@ const useHttp = () => {
           });
         })
         .catch(error => {
-          console.log('sss', error)
           dispatchHttp({
             type: 'ERROR',
             errorMessage: 'Something went wrong!'

@@ -5,6 +5,7 @@ const Search = React.memo(({ inputValue}) => {
 
   const [enteredFilter, setEnteredFilter] = useState('');
 
+  // Get input value on Change
   const inputHandler = (e) => {
           inputValue(e.target.value); 
           setEnteredFilter(e.target.value)

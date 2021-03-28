@@ -26,6 +26,7 @@ const ShipmentDetails = () => {
         );
     }, [sendRequest, id]);
 
+    //fetch data
     useEffect(() => {
         if (!isLoading && !error && data) {
             const loadedShipments = { ...data };
